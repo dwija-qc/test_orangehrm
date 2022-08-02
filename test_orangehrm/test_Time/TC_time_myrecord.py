@@ -14,10 +14,10 @@ class admin(unittest.TestCase):
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
 
     
- #TC_performance_configureKPI_002
-    def test_a_TC_performance_configureKPI_002(self):
+ #TC_time_in_out_004
+    def test_b_TC_time_in_out_004(self):
 
-        browser = self.browser  
+        browser = self.browser 
         browser.get("https://opensource-demo.orangehrmlive.com/") 
         time.sleep(3)
         browser.find_element(By.ID,"txtUsername").send_keys("Admin") 
@@ -26,21 +26,20 @@ class admin(unittest.TestCase):
         time.sleep(1)
         browser.find_element(By.ID, "btnLogin").click() 
         time.sleep(3)
-        browser.find_element(By.ID,"menu__Performance").click()
+        browser.find_element(By.ID,"menu_time_viewTimeModule").click()
         time.sleep(1)
-        browser.find_element(By.ID,"menu_performance_Configure").click()
+        browser.find_element(By.ID,"menu_attendance_Attendance").click()
         time.sleep(1)
-        browser.find_element(By.XPATH,'//*[@id="menu_performance_searchKpi"]').click()
+        browser.find_element(By.XPATH,'//*[@id="menu_attendance_viewMyAttendanceRecord"]').click()
         time.sleep(1)
-        select = Select(browser.find_element(By.NAME,"kpi360SearchForm[jobTitleCode]"))
-        select.select_by_value("10")
+        browser.find_element(By.ID,"attendance_date").click()
         time.sleep(1)
-        browser.find_element(By.ID,"searchBtn").click()
+        browser.find_element(By.XPATH,'//*[@id="ui-datepicker-div"]/table/tbody/tr[1]/td[1]/a').click()
         time.sleep(1)
 
-        response_data = browser.find_element(By.XPATH,'//*[@id="resultTable"]/tbody/tr[1]/td[3]').text
+        response_data = browser.find_element(By.XPATH,'//*[@id="employeeRecordsForm"]/table/tbody/tr[1]/td[2]/span').text
         
-        self.assertIn("IT Manager",response_data)
+        self.assertIn("GMT",response_data)
 
 
     def tearDown(self): 
