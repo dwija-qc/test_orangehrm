@@ -14,8 +14,8 @@ class admin(unittest.TestCase):
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
 
     
- #TC_time_in_out_004
-    def test_b_TC_time_in_out_004(self):
+ #TC_time_myrecord_002
+    def test_a_TC_time_myrecord_002(self):
 
         browser = self.browser 
         browser.get("https://opensource-demo.orangehrmlive.com/") 
@@ -41,6 +41,32 @@ class admin(unittest.TestCase):
         
         self.assertIn("GMT",response_data)
 
+#TC_time_myrecord_003
+    def test_a_TC_time_myrecord_003(self):
+
+        browser = self.browser 
+        browser.get("https://opensource-demo.orangehrmlive.com/") 
+        time.sleep(3)
+        browser.find_element(By.ID,"txtUsername").send_keys("Admin") 
+        time.sleep(1)
+        browser.find_element(By.ID,"txtPassword").send_keys("admin123")
+        time.sleep(1)
+        browser.find_element(By.ID, "btnLogin").click() 
+        time.sleep(3)
+        browser.find_element(By.ID,"menu_time_viewTimeModule").click()
+        time.sleep(1)
+        browser.find_element(By.ID,"menu_attendance_Attendance").click()
+        time.sleep(1)
+        browser.find_element(By.XPATH,'//*[@id="menu_attendance_viewMyAttendanceRecord"]').click()
+        time.sleep(1)
+        browser.find_element(By.ID,"attendance_date").click()
+        time.sleep(1)
+        browser.find_element(By.XPATH,'//*[@id="ui-datepicker-div"]/table/tbody/tr[2]/td[3]/a').click()
+        time.sleep(1)
+
+        response_data = browser.find_element(By.XPATH,'//*[@id="noRecordsColumn"]').text
+        
+        self.assertIn("No attendance",response_data)
 
     def tearDown(self): 
         self.browser.close() 
